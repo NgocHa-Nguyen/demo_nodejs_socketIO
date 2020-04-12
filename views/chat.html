@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>SocketIO-DEMO</title>
+
+    <link rel="stylesheet" href="/css/styles.css">
+
+    <script src="/js/socket.io.js"></script>
+    <script src="/js/jquery-3.3.1.min.js"></script>
+    <script src="/js/chat.js"></script>
+</head>
+
+<body>
+
+    <fieldset>
+        <legend>Demo chat realtime NodeJS</legend>
+        <div id="connect">
+            <!-- <input type="text" id="username" name="username" placeholder="Enter the name .." /> -->
+            <input type="text" id="username" name="username" placeholder="Enter name">
+            <br>
+            <div id="content"></div>
+
+            <input id="message" placeholder="Write something..">
+            <br>
+            <button id="sendMessage">CONNECT </button>
+        </div>
+        <div>
+            <ul id="list-user-active">
+            </ul>
+        </div>
+    </fieldset>
+
+</body>
+
+</html>
