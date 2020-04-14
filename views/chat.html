@@ -15,20 +15,28 @@
 
     <fieldset>
         <legend>Demo chat realtime NodeJS</legend>
-        <div id="connect">
-            <!-- <input type="text" id="username" name="username" placeholder="Enter the name .." /> -->
+        <div id='message-alert' style="display: none"></div>
+        <div id="connect-form">
             <input type="text" id="username" name="username" placeholder="Enter name">
             <br>
-            <div id="content"></div>
+            <button id='connect-btn'>Connect</button>
+        </div>
 
+        <div id="chat-body" style="display: none;">
+            <h3 id='hello-title'></h3>
+            <div id="content" style="border: 1px solid #ddd;padding: 5px"></div>
             <input id="message" placeholder="Write something..">
             <br>
-            <button id="sendMessage">CONNECT </button>
+            <button id="send-btn">Send</button>
+            <div>
+                <ul id="list-user-active">
+                    List user active:
+
+                </ul>
+            </div>
+            <button id='logout-btn'>Logout</button>
         </div>
-        <div>
-            <ul id="list-user-active">
-            </ul>
-        </div>
+        
     </fieldset>
 
 </body>

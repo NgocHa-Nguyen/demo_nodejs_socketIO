@@ -19,6 +19,14 @@ io.on('connection', function (socket) {
     socket.on('send', function (data) {
         io.sockets.emit('send', data);
     });
+
+    socket.on('online', function (data) {
+        io.sockets.emit('online', data);
+    });
+
+    socket.on('logout', function (data) {
+        io.sockets.emit('logout', data);
+    });
 });
 
 //Khởi tạo 1 server listen tại 1 port
