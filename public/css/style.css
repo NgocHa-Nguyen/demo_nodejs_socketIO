@@ -13,3 +13,15 @@
 #username, #content, #message, #sendMessage {
     margin-bottom: 5px;
 }
+
+#connect-form{
+	width: 500px;
+	border: 1px solid #ccc;
+	padding: 15px;
+}
+
+#chat-body{
+	width: 500px;
+	border: 1px solid #ccc;
+	padding: 15px;
+}

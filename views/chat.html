@@ -4,29 +4,35 @@
 <head>
     <title>SocketIO-DEMO</title>
 
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
 
     <script src="/js/socket.io.js"></script>
     <script src="/js/jquery-3.3.1.min.js"></script>
     <script src="/js/chat.js"></script>
 </head>
 
-<body>
+<body class="container">
 
     <fieldset>
         <legend>Demo chat realtime NodeJS</legend>
         <div id='message-alert' style="display: none"></div>
         <div id="connect-form">
-            <input type="text" id="username" name="username" placeholder="Enter name">
-            <br>
-            <button id='connect-btn'>Connect</button>
+            <label>Username</label>
+            <input type="text" id="username" name="username" 
+                placeholder="Enter Username" class="form-control">
+            <label>Password</label>
+            <input type="password" name="password" 
+                placeholder="Enter Password" id="password" class="form-control"><br>
+
+            <button id='connect-btn' class="btn btn-primary">Login</button>
+            <a href="">Register</a>
         </div>
 
         <div id="chat-body" style="display: none;">
             <h3 id='hello-title'></h3>
             <div id="content" style="border: 1px solid #ddd;padding: 5px"></div>
-            <input id="message" placeholder="Write something..">
-            <br>
+            <input id="message" placeholder="Write something.." class="form-control">
             <button id="send-btn">Send</button>
             <div>
                 <ul id="list-user-active">
@@ -40,5 +46,7 @@
     </fieldset>
 
 </body>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 </html>

@@ -8,6 +8,18 @@ $(function () {
         $("#connect-form").css('display', 'none');
         $("#chat-body").css('display', 'block');
         $("#hello-title").html('Hello, ' + username);
+
+        $.ajax({
+            url: "getHistoryMsg",
+            type: 'GET',
+            success: function(res){
+                $.each(res, function(i, data){
+                    $("#content").append("<p class='message'>" + data.username + ", " 
+                    + "<span style='color:#c1b7b7'>" + data.time + "</span>"
+                    + ": " + data.message + "</p>");
+                })
+            }
+        });
     }
     // Gởi logout sự kiện
     $("#connect-btn").on('click', function () {
@@ -22,18 +34,9 @@ $(function () {
 
 
     // Bắt logout sự kiện
-    socket.on("online", function (data) {
-        var user = data.username;
-        if ($("#" + user).length == 0) {
-            $("#list-user-active").append("<li id='" + user + "'>" + user + "</li>");
-
-            $("#message-alert").css('display', 'block');
-            $("#message-alert").text(user + ' is online!');
-            setTimeout(function(){
-                $("#message-alert").css('display', 'none');
-            }, 2000);
-
-        }
+    socket.on("online", function (res) {
+        renderListUserActive(res.users);
+        alertMsg(res.username + ' is online!');
     });
 
     // Gởi logout sự kiện
@@ -44,32 +47,47 @@ $(function () {
     });
 
     // Bắt logout sự kiện
-    socket.on("logout", function (data) {
-        var user = data.username;
-        $("#" + user).remove();
-        $("#message-alert").css('display', 'block');
-        $("#message-alert").text(user + ' is offline!');
-        setTimeout(function(){
-            $("#message").css('display', 'none');
-        }, 2000);
+    socket.on("logout", function (res) {
+        renderListUserActive(res.users);
+        alertMsg(res.username + ' is offline!');
     });
 
+    function renderListUserActive(users) {
+        $("#list-user-active").empty();
+        $("#list-user-active").append("List user active:");
+        $.each(users, function(i, data){
+            var user = data.username;
+            if ($("#" + user).length == 0) {
+                $("#list-user-active").append("<li id='" + user + "'>" + user + "</li>");
+            }
+        });
+    }
+
+    function alertMsg(msg){
+        $("#message-alert").css('display', 'block');
+        $("#message-alert").text(msg);
+        setTimeout(function(){
+            $("#message-alert").css('display', 'none');
+        }, 2000);
+    }
     //Socket nhận data và append vào giao diện
     socket.on("send", function (data) {
-        $("#content").append("<p class='message'>" + data.username + ": " + data.message + "</p>");
+        $("#content").append("<p class='message'>" + data.username + ", " 
+            + "<span style='color:#c1b7b7'>" + data.time + "</span>"
+            + ": " + data.message + "</p>");
     });
 
     function sendMsg() {
         var username = $('#username').val();
         var message = $('#message').val();
-        console.log(username);
-        console.log(message);
 
         if (username == '' || message == '') {
             alert('Please enter name and message!!');
         } else {
+            var date = moment(); //Get the current date
+            var time = date.format("HH:mm:ss");
             //Gửi dữ liệu cho socket
-            socket.emit('send', {username: username, message: message});
+            socket.emit('send', {username: username, message: message, time: time});
             $('#message').val('');
         }
     }
